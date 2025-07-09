@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Reset Sequencer Lab</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #eef2f7; padding: 30px; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 0 10px #aaa; }
+        h2 { color: #2a7ae2; }
+        input[type=text], input[type=password], input[type=email] {
+            width: 100%; padding: 10px; margin: 8px 0; box-sizing: border-box; font-size: 1em;
+        }
+        input[type=submit] {
+            background-color: #2a7ae2; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer;
+            font-size: 1em;
+        }
+        input[type=submit]:hover { background-color: #1e5bb8; }
+        .message { margin-top: 20px; font-weight: bold; color: #d43f3a; }
+        form { margin-bottom: 30px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Password Reset - Generate Token</h2>
+        <form method="POST" action="/">
+            <input type="hidden" name="action" value="reset">
+            <label for="email_reset">Email address:</label>
+            <input type="email" id="email_reset" name="email" placeholder="your.email@example.com" required>
+            <input type="submit" value="Generate Reset Token">
+        </form>
+
+        <h2>Password Update - Use Reset Token</h2>
+        <form method="POST" action="/">
+            <input type="hidden" name="action" value="update">
+            <label for="email_update">Email address:</label>
+            <input type="email" id="email_update" name="email" placeholder="your.email@example.com" required>
+
+            <label for="token">Reset Token:</label>
+            <input type="text" id="token" name="token" placeholder="e.g. value" >
+
+            <label for="new_password">New Password:</label>
+            <input type="password" id="new_password" name="new_password" placeholder="Enter new password" required>
+
+            <input type="submit" value="Update Password">
+        </form>
+
+        <div class="message">{{message}}</div>
+    </div>
+</body>
+</html>

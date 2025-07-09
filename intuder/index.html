@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Token Guess Challenge</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f7f9fc; padding: 40px; }
+        .container { max-width: 400px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 12px #aaa; }
+        input[type=text] { width: 100%; padding: 10px; margin: 15px 0; font-size: 1em; }
+        input[type=submit] { padding: 10px 20px; font-size: 1em; background: #2a7ae2; border: none; color: white; border-radius: 5px; cursor: pointer; }
+        input[type=submit]:hover { background: #1e5bb8; }
+        .message { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Guess the 4-digit Token</h2>
+        <form method="POST" action="/">
+            <input type="text" name="token_guess" maxlength="4" placeholder="Enter 4-digit token" pattern="\d{4}" required />
+            <input type="submit" value="Submit Guess" />
+        </form>
+        <button id="generateTokenBtn" type="button" style="margin-top:15px; width:100%; background:#28a745; color:white; border:none; padding:10px; border-radius:5px; font-size:1em; cursor:pointer;">Generate Token</button>
+        <div class="message">{{message}}</div>
+    </div>
+</body>
+<script>
+    document.getElementById('generateTokenBtn').onclick = function() {
+        fetch('/generate_token', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            });
+    };
+</script>
+</html>
