@@ -8,7 +8,6 @@ app.secret_key = 'secret123'  # Used to sign the session cookie
 # Serve the frontend index.html at the root URL
 @app.route('/')
 def index():
-    # Use absolute path so it works even when launched by main.py
     base_dir = os.path.dirname(os.path.abspath(__file__))
     index_path = os.path.join(base_dir, 'index.html')
     with open(index_path, 'r', encoding='utf-8') as f:
@@ -36,6 +35,6 @@ def admin():
         return "You are not admin"
 
 if __name__ == '__main__':
-    # Accept port from command line (used by main.py)
-    port = int(sys.argv[1]) if len(sys.argv) > 1 else 4001
-    app.run(debug=True, port=port)
+    # Accept port from command line, default to 4003
+    port = int(sys.argv[1]) if len(sys.argv) > 1 else 4003
+    app.run(host='0.0.0.0', debug=True, port=port)
